@@ -22,7 +22,10 @@
           <span class="brand-name">jopism</span>
           <span class="brand-byline">Curiosity in all directions</span>
         </a>
-        <a class="header-link" href="#format">The format <span aria-hidden="true">↓</span></a>
+        <nav class="header-nav" aria-label="Page navigation">
+          <a class="header-link" href="#format">The format</a>
+          <a class="header-link" href="#calculator">Scoring calculator <span aria-hidden="true">↓</span></a>
+        </nav>
       </div>
     </header>
 
@@ -65,8 +68,8 @@
             <p class="eyebrow">The idea</p>
             <h2 id="format-title">Three events.<br /><span>One combined score.</span></h2>
             <p>
-              Jopathlon pairs a triathlon with a round of golf, then adds beer
-              to the tally. Each part contributes to the final result.
+              Your official triathlon time is adjusted by your Stableford golf
+              points and the number of beers you enjoy during the day.
             </p>
           </div>
 
@@ -81,16 +84,100 @@
               <span class="format-card__number" aria-hidden="true">02</span>
               <p class="format-card__label">On the course</p>
               <h3>Play a round</h3>
-              <p>Your golf score adds to or subtracts from your triathlon time.</p>
+              <p>Start from 36 Stableford points: each point below adds 2 minutes, and each point above subtracts 2 minutes.</p>
             </li>
             <li class="format-card">
               <span class="format-card__number" aria-hidden="true">03</span>
               <p class="format-card__label">The refreshment</p>
               <h3>Count the beers</h3>
-              <p>The beer tally also adds to or subtracts from your triathlon time.</p>
+              <p>Subtract 15 minutes for each standard beer. Your adjusted time can be calculated below.</p>
             </li>
           </ol>
-          <p class="format-note">Put the three parts together to get your Jopathlon result.</p>
+          <p class="format-note">Final time = triathlon time + golf adjustment − beer bonus.</p>
+        </div>
+      </section>
+
+      <section id="calculator" class="calculator-section" aria-labelledby="calculator-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Put the formula to work</p>
+            <h2 id="calculator-title">Calculate your<br /><span>Jopathlon time.</span></h2>
+            <p>Enter your results to see the adjusted time and a breakdown of every adjustment.</p>
+          </div>
+
+          <div class="calculator">
+            <form class="calculator-form" id="scoreForm">
+              <div class="calculator-form__heading">
+                <div>
+                  <h3>Jopathlon calculator</h3>
+                  <p>Try a sample competitor or enter your own results.</p>
+                </div>
+                <div class="preset-buttons" aria-label="Sample competitors">
+                  <button class="preset-button" type="button" data-preset="A" aria-pressed="true">Competitor A</button>
+                  <button class="preset-button" type="button" data-preset="B" aria-pressed="false">Competitor B</button>
+                </div>
+              </div>
+
+              <div class="calculator-fields">
+                <fieldset class="calculator-field">
+                  <legend>01. Triathlon finish time <span class="field-hint">0-24 hours · 0-59 minutes</span></legend>
+                  <div class="time-fields">
+                    <label class="number-field">
+                      <span class="visually-hidden">Triathlon hours</span>
+                      <input id="triHours" name="triHours" type="number" min="0" max="24" step="1" value="3" required inputmode="numeric" />
+                      <span aria-hidden="true">HRS</span>
+                    </label>
+                    <label class="number-field">
+                      <span class="visually-hidden">Triathlon minutes</span>
+                      <input id="triMins" name="triMins" type="number" min="0" max="59" step="1" value="30" required inputmode="numeric" />
+                      <span aria-hidden="true">MINS</span>
+                    </label>
+                  </div>
+                </fieldset>
+
+                <label class="calculator-field" for="golfPoints">
+                  <span>02. Golf Stableford points <span class="field-hint">0-72 points · 36 = baseline</span></span>
+                  <span class="number-field">
+                    <input id="golfPoints" name="golfPoints" type="number" min="0" max="72" step="1" value="28" required inputmode="numeric" />
+                    <span aria-hidden="true">PTS</span>
+                  </span>
+                </label>
+
+                <label class="calculator-field" for="beerCount">
+                  <span>03. Beers consumed <span class="field-hint">0-30 beers · −15 minutes each</span></span>
+                  <span class="number-field">
+                    <input id="beerCount" name="beerCount" type="number" min="0" max="30" step="1" value="6" required inputmode="numeric" />
+                    <span aria-hidden="true">BEERS</span>
+                  </span>
+                </label>
+              </div>
+              <p class="calculator-error" id="scoreError" role="alert" hidden>Use whole numbers within the limits shown.</p>
+            </form>
+
+            <section class="score-result" aria-labelledby="result-title">
+              <div>
+                <p class="score-result__eyebrow" id="result-title">Your live final result</p>
+                <output class="score-result__time" id="finalTimeDisplay" for="triHours triMins golfPoints beerCount" aria-live="polite">2h 16m</output>
+                <p class="score-result__total" id="totalMinutesDisplay">(136 total adjusted minutes)</p>
+
+                <dl class="score-breakdown">
+                  <div>
+                    <dt>Triathlon time</dt>
+                    <dd id="triBaseBreakdown">+210 mins</dd>
+                  </div>
+                  <div>
+                    <dt id="golfLabel">Golf adjustment (28 pts)</dt>
+                    <dd id="golfBreakdown" class="is-penalty">+16 mins</dd>
+                  </div>
+                  <div>
+                    <dt id="beerLabel">Beer bonus (6 beers)</dt>
+                    <dd id="beerBreakdown" class="is-bonus">−90 mins</dd>
+                  </div>
+                </dl>
+              </div>
+              <p class="competitor-note" id="profileDescription">Solid golfer and social drinker. Golf and beer adjustments offset some of the triathlon time.</p>
+            </section>
+          </div>
         </div>
       </section>
     </main>
@@ -99,5 +186,6 @@
       <a class="footer-brand" href="https://jopism.com/">jopism</a>
       <span>Triathlon. Golf. Beer.</span>
     </footer>
+    <script src="scoring.js" defer></script>
   </body>
-</html>
+  </html>

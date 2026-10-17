@@ -7,7 +7,15 @@ original Triathlon. Golf. Beer. concept and is published at
 ## Preview
 
 Open `index.html` in a browser. The site has no build step or runtime
-dependencies.
+dependencies. The scoring calculator is implemented in `scoring.js` and
+updates locally in the browser.
+
+## Scoring
+
+The final time is the triathlon time in minutes, plus two minutes for each
+Stableford point below 36 (or minus two minutes for each point above 36), minus
+15 minutes for each standard beer. The calculator shows the result and each
+part of the calculation.
 
 ## Hosting
 

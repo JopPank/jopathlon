@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jopathlon — Scoring System & Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            jopBg: '#09120d',
+            jopCard: '#122018',
+            jopCardBorder: '#1c3125',
+            jopCardHover: '#223c2d',
+            jopAccent: '#2eef8a',
+            jopAccentMuted: '#1da25e',
+            jopTextMuted: '#8ba294',
+            jopGold: '#e5bf70'
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'Georgia', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom styling for sleek input controls and subtle glow */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #09120d;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #1c3125;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-jopBg text-gray-100 font-sans antialiased min-h-screen py-12 px-4 sm:px-6 lg:px-8 custom-scrollbar selection:bg-jopAccent selection:text-jopBg">
+
+  <main class="max-w-6xl mx-auto space-y-16">
+
+    <!-- Header Section -->
+    <header class="text-center space-y-4 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-jopCardBorder/60 border border-jopCardBorder text-jopAccent text-xs font-semibold tracking-widest uppercase">
+        <span class="w-1.5 h-1.5 rounded-full bg-jopAccent animate-pulse"></span>
+        The Format & Formula
+      </div>
+      
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+        Three events. <br class="hidden sm:block"/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-jopTextMuted">One combined time.</span>
+      </h1>
+
+      <!-- Main Formula Banner -->
+      <div class="pt-2">
+        <div class="inline-block bg-jopCard/90 border border-jopCardBorder rounded-2xl px-6 py-4 shadow-2xl backdrop-blur-sm">
+          <p class="font-mono text-sm sm:text-base text-jopAccent font-medium tracking-wide">
+            Final Time = Triathlon Time + Golf Adj. − Beer Bonus
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Three Rules Cards Grid -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card 01 -->
+      <div class="group relative bg-jopCard border border-jopCardBorder hover:border-jopAccentMuted/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-jopAccent/5 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="font-mono text-xs font-bold text-jopAccent/80 tracking-widest">01</span>
+            <span class="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded bg-jopCardBorder/80 text-jopTextMuted">Endurance</span>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-white group-hover:text-jopAccent transition-colors">
+            Do a triathlon
+          </h2>
+          <p class="text-sm text-jopTextMuted leading-relaxed">
+            <strong class="text-gray-200 font-medium">Base Time:</strong> Start with your official triathlon chip finish time converted entirely into total minutes.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-jopCardBorder/60 flex items-center justify-between text-xs text-jopTextMuted font-mono">
+          <span>Units: Minutes</span>
+          <span class="text-jopAccent">+ Standard Clock</span>
+        </div>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="group relative bg-jopCard border border-jopCardBorder hover:border-jopAccentMuted/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-jopAccent/5 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="font-mono text-xs font-bold text-jopAccent/80 tracking-widest">02</span>
+            <span class="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded bg-jopCardBorder/80 text-jopTextMuted">On The Course</span>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-white group-hover:text-jopAccent transition-colors">
+            Play a round
+          </h2>
+          <p class="text-sm text-jopTextMuted leading-relaxed">
+            <strong class="text-gray-200 font-medium">Golf Adjustment:</strong> Based on 36 Stableford points (2 pts Par, 1 pt Bogey, 3 pts Birdie):
+          </p>
+          <ul class="text-xs text-jopTextMuted space-y-1.5 font-mono pt-1">
+            <li class="flex items-center gap-2">
+              <span class="text-red-400 font-bold">+2 mins</span> for each point under 36
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-jopAccent font-bold">−2 mins</span> for each point over 36
+            </li>
+          </ul>
+        </div>
+        <div class="pt-6 mt-6 border-t border-jopCardBorder/60 flex items-center justify-between text-xs text-jopTextMuted font-mono">
+          <span>Baseline: 36 Pts</span>
+          <span class="text-jopGold">± 2 Mins / Pt</span>
+        </div>
+      </div>
+
+      <!-- Card 03 -->
+      <div class="group relative bg-jopCard border border-jopCardBorder hover:border-jopAccentMuted/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-jopAccent/5 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="font-mono text-xs font-bold text-jopAccent/80 tracking-widest">03</span>
+            <span class="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-1 rounded bg-jopCardBorder/80 text-jopTextMuted">The Refreshment</span>
+          </div>
+          <h2 class="font-serif text-2xl font-bold text-white group-hover:text-jopAccent transition-colors">
+            Count the beers
+          </h2>
+          <p class="text-sm text-jopTextMuted leading-relaxed">
+            <strong class="text-gray-200 font-medium">Beer Bonus:</strong> Subtract <span class="text-jopAccent font-semibold">15 minutes</span> from your time for every standard beer consumed throughout the day.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-jopCardBorder/60 flex items-center justify-between text-xs text-jopTextMuted font-mono">
+          <span>Deduction Rate</span>
+          <span class="text-jopAccent">−15 Mins / Beer</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Interactive Calculator Widget -->
+    <section class="bg-jopCard border border-jopCardBorder rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+      
+      <!-- Background Ambient Glow -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-jopAccent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row gap-10 items-stretch">
+        
+        <!-- Controls Column -->
+        <div class="w-full lg:w-7/12 space-y-8">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-jopCardBorder pb-6">
+            <div>
+              <h3 class="font-serif text-2xl font-bold text-white">Jopathlon Calculator</h3>
+              <p class="text-xs text-jopTextMuted mt-1">Test different performance and beverage strategies</p>
+            </div>
+
+            <!-- Preset Toggles -->
+            <div class="flex items-center gap-2 bg-jopBg p-1.5 rounded-xl border border-jopCardBorder">
+              <button 
+                id="btnPresetA" 
+                onclick="applyPreset('A')"
+                class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 bg-jopCardBorder text-white hover:bg-jopCardHover">
+                Competitor A
+              </button>
+              <button 
+                id="btnPresetB" 
+                onclick="applyPreset('B')"
+                class="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-jopTextMuted hover:text-white hover:bg-jopCardHover">
+                Competitor B
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            
+            <!-- Input 1: Triathlon Time -->
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-jopTextMuted">
+                01. Triathlon Finish Time
+              </label>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="relative">
+                  <input 
+                    type="number" 
+                    id="triHours" 
+                    min="0" 
+                    max="24" 
+                    value="3" 
+                    oninput="calculateScore()"
+                    class="w-full bg-jopBg border border-jopCardBorder focus:border-jopAccent rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-jopAccent transition">
+                  <span class="absolute right-4 top-3.5 text-xs text-jopTextMuted font-mono">HRS</span>
+                </div>
+                <div class="relative">
+                  <input 
+                    type="number" 
+                    id="triMins" 
+                    min="0" 
+                    max="59" 
+                    value="30" 
+                    oninput="calculateScore()"
+                    class="w-full bg-jopBg border border-jopCardBorder focus:border-jopAccent rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-jopAccent transition">
+                  <span class="absolute right-4 top-3.5 text-xs text-jopTextMuted font-mono">MINS</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input 2: Golf Stableford Points -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-jopTextMuted">
+                  02. Golf Stableford Points
+                </label>
+                <span class="text-[11px] text-jopTextMuted">36 pts = Even Par baseline</span>
+              </div>
+              <div class="relative">
+                <input 
+                  type="number" 
+                  id="golfPoints" 
+                  min="0" 
+                  max="72" 
+                  value="28" 
+                  oninput="calculateScore()"
+                  class="w-full bg-jopBg border border-jopCardBorder focus:border-jopAccent rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-jopAccent transition">
+                <span class="absolute right-4 top-3.5 text-xs text-jopTextMuted font-mono">PTS</span>
+              </div>
+            </div>
+
+            <!-- Input 3: Beers Consumed -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <label class="block text-xs font-semibold uppercase tracking-wider text-jopTextMuted">
+                  03. Beers Consumed
+                </label>
+                <span class="text-[11px] text-jopTextMuted">−15 mins each</span>
+              </div>
+              <div class="relative">
+                <input 
+                  type="number" 
+                  id="beerCount" 
+                  min="0" 
+                  max="30" 
+                  value="6" 
+                  oninput="calculateScore()"
+                  class="w-full bg-jopBg border border-jopCardBorder focus:border-jopAccent rounded-xl px-4 py-3 text-white text-lg font-mono focus:outline-none focus:ring-1 focus:ring-jopAccent transition">
+                <span class="absolute right-4 top-3.5 text-xs text-jopTextMuted font-mono">BEERS</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Live Score Output Column -->
+        <div class="w-full lg:w-5/12 bg-jopBg/80 border border-jopCardBorder rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative">
+          
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-widest text-jopTextMuted block mb-1">
+              Live Final Result
+            </span>
+            <div id="finalTimeDisplay" class="font-serif text-4xl sm:text-5xl font-bold text-jopAccent tracking-tight py-2">
+              2h 16m
+            </div>
+            <p id="totalMinutesDisplay" class="text-xs font-mono text-jopTextMuted border-b border-jopCardBorder pb-4">
+              (136 total adjusted minutes)
+            </p>
+
+            <!-- Tally Breakdown -->
+            <div class="space-y-3 pt-6 text-sm">
+              <div class="flex justify-between items-center text-gray-300">
+                <span class="text-xs text-jopTextMuted">Triathlon Time:</span>
+                <span id="triBaseBreakdown" class="font-mono font-medium">+210 mins</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-jopTextMuted">Golf Adj. (28 pts):</span>
+                <span id="golfBreakdown" class="font-mono font-medium text-red-400">+16 mins</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-xs text-jopTextMuted">Beer Bonus (6 beers):</span>
+                <span id="beerBreakdown" class="font-mono font-medium text-jopAccent">−90 mins</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Comparative Insight Callout -->
+          <div id="comparisonNote" class="mt-8 pt-4 border-t border-jopCardBorder text-xs text-jopTextMuted leading-relaxed font-sans">
+            <span class="text-white font-semibold block mb-0.5">Competitor Profile:</span>
+            <span id="profileDescription">Solid golfer & active drinker. Equalizes a slower triathlon leg through course strategy and refreshment.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Calculation Logic Script -->
+  <script>
+    const presets = {
+      'A': { hrs: 3, mins: 30, golf: 28, beers: 6, label: "Solid golfer & social drinker. Equalizes a slower triathlon leg through course strategy and refreshment." },
+      'B': { hrs: 2, mins: 20, golf: 14, beers: 2, label: "Speed demon on the course/tri, but high golf score and fewer beers keep them nearly neck-and-neck!" }
+    };
+
+    let currentPreset = 'A';
+
+    function applyPreset(presetKey) {
+      currentPreset = presetKey;
+      const data = presets[presetKey];
+
+      document.getElementById('triHours').value = data.hrs;
+      document.getElementById('triMins').value = data.mins;
+      document.getElementById('golfPoints').value = data.golf;
+      document.getElementById('beerCount').value = data.beers;
+      document.getElementById('profileDescription').innerText = data.label;
+
+      // Update button styles
+      const btnA = document.getElementById('btnPresetA');
+      const btnB = document.getElementById('btnPresetB');
+
+      if (presetKey === 'A') {
+        btnA.className = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 bg-jopCardBorder text-white hover:bg-jopCardHover";
+        btnB.className = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-jopTextMuted hover:text-white hover:bg-jopCardHover";
+      } else {
+        btnB.className = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 bg-jopCardBorder text-white hover:bg-jopCardHover";
+        btnA.className = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 text-jopTextMuted hover:text-white hover:bg-jopCardHover";
+      }
+
+      calculateScore();
+    }
+
+    function calculateScore() {
+      // Inputs
+      const hrs = parseInt(document.getElementById('triHours').value) || 0;
+      const mins = parseInt(document.getElementById('triMins').value) || 0;
+      const golfPts = parseInt(document.getElementById('golfPoints').value) || 0;
+      const beers = parseInt(document.getElementById('beerCount').value) || 0;
+
+      // Formula Math
+      const triBaseMinutes = (hrs * 60) + mins;
+      
+      // Golf: 36 pts is baseline. Below 36 adds time (+2m per pt), Above 36 subtracts time (-2m per pt)
+      const golfDiffPts = 36 - golfPts;
+      const golfAdjMinutes = golfDiffPts * 2; 
+
+      // Beer: -15 mins per beer
+      const beerBonusMinutes = beers * 15;
+
+      // Final Combined Time
+      const finalMinutes = triBaseMinutes + golfAdjMinutes - beerBonusMinutes;
+
+      // Format Final Output
+      const displayHrs = Math.floor(Math.abs(finalMinutes) / 60);
+      const displayMins = Math.abs(finalMinutes) % 60;
+      const sign = finalMinutes < 0 ? "-" : "";
+
+      document.getElementById('finalTimeDisplay').innerText = `${sign}${displayHrs}h ${displayMins}m`;
+      document.getElementById('totalMinutesDisplay').innerText = `(${finalMinutes} total adjusted minutes)`;
+
+      // Update Breakdown List
+      document.getElementById('triBaseBreakdown').innerText = `+${triBaseMinutes} mins`;
+      
+      const golfBreakdownEl = document.getElementById('golfBreakdown');
+      if (golfAdjMinutes > 0) {
+        golfBreakdownEl.innerText = `+${golfAdjMinutes} mins`;
+        golfBreakdownEl.className = "font-mono font-medium text-red-400";
+      } else if (golfAdjMinutes < 0) {
+        golfBreakdownEl.innerText = `${golfAdjMinutes} mins`;
+        golfBreakdownEl.className = "font-mono font-medium text-jopAccent";
+      } else {
+        golfBreakdownEl.innerText = `0 mins (Even Par)`;
+        golfBreakdownEl.className = "font-mono font-medium text-gray-400";
+      }
+
+      document.getElementById('beerBreakdown').innerText = `−${beerBonusMinutes} mins`;
+    }
+
+    // Initialize calculation on page load
+    window.onload = function() {
+      calculateScore();
+    };
+  </script>
+</body>
+</html>
