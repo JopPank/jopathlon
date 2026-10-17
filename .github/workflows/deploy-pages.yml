@@ -30,6 +30,8 @@ jobs:
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
 
       - name: Deploy site
         id: deployment
