@@ -5,59 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Jopathlon: do a triathlon, play golf, drink beer, and add up your time."
+      content="Jopathlon brings a triathlon, a round of golf, and beer together in one playful day of scoring."
     />
-    <meta name="theme-color" content="#28333b" />
+    <meta name="theme-color" content="#101813" />
     <link rel="canonical" href="https://jopathlon.jopism.com/" />
     <link rel="icon" href="triathlon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
     <title>Jopathlon — Triathlon. Golf. Beer.</title>
   </head>
   <body>
-    <a class="skip-link" href="#how-it-works">Skip to how it works</a>
+    <a class="skip-link" href="#format">Skip to the format</a>
 
-    <header class="hero">
-      <div class="hero__geometry" aria-hidden="true"></div>
-      <div class="hero__content">
-        <p class="wordmark">Jopathlon</p>
-        <h1>Triathlon. <span>Golf.</span> Beer.</h1>
-        <img
-          class="hero__illustration"
-          src="triathlon.svg"
-          alt="Illustration of a swimmer, cyclist, and runner"
-          width="900"
-          height="280"
-        />
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="https://jopism.com/" aria-label="Jopism home">
+          <span class="brand-name">jopism</span>
+          <span class="brand-byline">Curiosity in all directions</span>
+        </a>
+        <a class="header-link" href="#format">The format <span aria-hidden="true">↓</span></a>
       </div>
     </header>
 
-    <main id="how-it-works" class="how-it-works">
-      <div class="how-it-works__content">
-        <p class="eyebrow">The idea</p>
-        <h2>How it works</h2>
-        <ol class="steps">
-          <li>
-            <span class="step-number" aria-hidden="true">01</span>
-            <span>Do a triathlon.</span>
-          </li>
-          <li>
-            <span class="step-number" aria-hidden="true">02</span>
-            <span>Play golf—your score adds to or subtracts from your triathlon time.</span>
-          </li>
-          <li>
-            <span class="step-number" aria-hidden="true">03</span>
-            <span>Drink beer—your beers add to or subtract from your triathlon time.</span>
-          </li>
-          <li>
-            <span class="step-number" aria-hidden="true">04</span>
-            <span>Add up your time.</span>
-          </li>
-        </ol>
-      </div>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">An endurance event with a twist</p>
+            <h1 id="page-title">Triathlon.<br /><span>Golf.</span> Beer.</h1>
+            <p class="hero-description">
+              One big day out: race, hit the course, and bring it all together
+              in one final score.
+            </p>
+            <a class="hero-link" href="#format">Get to know Jopathlon <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <div class="activity-card">
+            <p class="activity-card__eyebrow">The course, from start to finish</p>
+            <img
+              class="activity-illustration"
+              src="activity-course-dark.png"
+              alt="Five teal-framed pictograms show swimming, cycling, running, golf, and two people clinking beer mugs."
+              width="1776"
+              height="592"
+            />
+            <ol class="activity-labels" aria-hidden="true">
+              <li>Swim</li>
+              <li>Bike</li>
+              <li>Run</li>
+              <li>Golf</li>
+              <li>Beer</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="format" class="format-section" aria-labelledby="format-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">The idea</p>
+            <h2 id="format-title">Three events.<br /><span>One combined score.</span></h2>
+            <p>
+              Jopathlon pairs a triathlon with a round of golf, then adds beer
+              to the tally. Each part contributes to the final result.
+            </p>
+          </div>
+
+          <ol class="format-grid">
+            <li class="format-card">
+              <span class="format-card__number" aria-hidden="true">01</span>
+              <p class="format-card__label">Endurance</p>
+              <h3>Do a triathlon</h3>
+              <p>Swim, bike, run—and record your finish time.</p>
+            </li>
+            <li class="format-card">
+              <span class="format-card__number" aria-hidden="true">02</span>
+              <p class="format-card__label">On the course</p>
+              <h3>Play a round</h3>
+              <p>Your golf score adds to or subtracts from your triathlon time.</p>
+            </li>
+            <li class="format-card">
+              <span class="format-card__number" aria-hidden="true">03</span>
+              <p class="format-card__label">The refreshment</p>
+              <h3>Count the beers</h3>
+              <p>The beer tally also adds to or subtracts from your triathlon time.</p>
+            </li>
+          </ol>
+          <p class="format-note">Put the three parts together to get your Jopathlon result.</p>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
-      <a href="https://jopism.com/">Part of Jopism</a>
+      <a class="footer-brand" href="https://jopism.com/">jopism</a>
+      <span>Triathlon. Golf. Beer.</span>
     </footer>
   </body>
 </html>
